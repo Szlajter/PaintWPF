@@ -1,0 +1,254 @@
+﻿<Fluent:RibbonWindow x:Class="PaintWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:Fluent="urn:fluent-ribbon"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PaintWPF"
+        mc:Ignorable="d"
+        Title="PaintWPF" Height="450" Width="800" WindowState="Maximized" 
+        Icon="Images/paint.png"  RenderOptions.BitmapScalingMode="HighQuality">
+    
+
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Fluent:Ribbon Grid.Row="0">
+            <Fluent:Ribbon.Menu>
+                <Fluent:ApplicationMenu Header="File">
+                    <Fluent:MenuItem Header="Nowy" 
+                                     Icon="Images/new.png"
+                                     RenderOptions.BitmapScalingMode="HighQuality"
+                                     Click="NewCanvas"/>
+                    <Fluent:MenuItem Header="Zapisz" 
+                                     Icon="Images/save.png" 
+                                     RenderOptions.BitmapScalingMode="HighQuality"
+                                     Click="SaveButton_Click"/>
+                    <Fluent:MenuItem Header="Otwórz" 
+                                     Icon="Images/open.png" 
+                                     RenderOptions.BitmapScalingMode="HighQuality"
+                                     Click="LoadCanvas"/>
+                </Fluent:ApplicationMenu>
+            </Fluent:Ribbon.Menu>
+
+            <Fluent:RibbonTabItem Header="Home" >
+                <Fluent:RibbonGroupBox Header="Tools">
+                    <Fluent:ToggleButton Header="pencil"
+                                         IsChecked="true"
+                                         GroupName="Tools"
+                                         Name="SelectPencil"
+                                         RenderOptions.BitmapScalingMode="HighQuality"
+                                         Click="PencilButton_Click"
+                                         Icon="Images/pencil.png"/>
+                    <Fluent:ToggleButton Header="eraser"
+                                         GroupName="Tools"
+                                         Name="SelectEraser"
+                                         Click="EraserButton_Click"
+                                         Icon="Images/eraser.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Shapes" State="Large">
+                    <StackPanel Orientation="Horizontal" Margin="5,10,0,0">
+                        <Fluent:ToggleButton GroupName="Tools"
+                                             Click="RectangleButton_Click"
+                                             Size="Small"
+                                             RenderOptions.BitmapScalingMode="HighQuality"
+                                             Icon="Images/rectangle.png"/>
+                        <Fluent:ToggleButton GroupName="Tools"
+                                             Click="EllipseButton_Click"
+                                             Size="Small"
+                                             RenderOptions.BitmapScalingMode="HighQuality"
+                                             Icon="Images/ellipse.png"/>
+                        <Fluent:ToggleButton GroupName="Tools"
+                                             Click="LineButton_Click"
+                                             Size="Small"
+                                             RenderOptions.BitmapScalingMode="HighQuality"
+                                             Icon="Images/line.png"/>
+                    </StackPanel>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox>
+                    <RibbonMenuButton Label="Size" LargeImageSource="Images/thickness-button.png">
+                        <RibbonRadioButton Label="1 Pixel" 
+                                           SmallImageSource="Images/1px-line.png"
+                                           Tag="1"
+                                           Click="SetSize_Click"></RibbonRadioButton>
+                        <RibbonRadioButton Label="3 Pixel" 
+                                           SmallImageSource="Images/3px-line.png"
+                                           Tag="3"
+                                           IsChecked="True"
+                                           Click="SetSize_Click"></RibbonRadioButton>
+                        <RibbonRadioButton Label="5 Pixel" 
+                                           SmallImageSource="Images/5px-line.png"
+                                           Tag="5"
+                                           Click="SetSize_Click"></RibbonRadioButton>
+                        <RibbonRadioButton Label="8 Pixel" 
+                                           SmallImageSource="Images/8px-line.png"
+                                           Tag="8"
+                                           Click="SetSize_Click"></RibbonRadioButton>
+                    </RibbonMenuButton>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox>
+                    <Fluent:Button Name="FillButton"
+                                   Header="No Fill" 
+                                   Width="50"
+                                   Icon="Images/fill.png"
+                                   Click="SetFill_Click">
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Colors" Width="350" HorizontalContentAlignment="Center" >
+                        <Fluent:Button Name="ColorMode" Header="Color 1"  Width="50" Margin="0 0 5 0"
+                                       Click="ChangeColorMode_Click">
+                            <Fluent:Button.LargeIcon>
+                            <Rectangle Name="ColorRect" Fill="Black" Width="50" Height="50" Stroke="#edf1f7"
+                                           StrokeThickness="1"></Rectangle>
+                            </Fluent:Button.LargeIcon>
+                        </Fluent:Button>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            
+                            <!-- added rectangle to make blue border when mouse over. it hides whole blue background -->
+                            <!-- stupid but works perfectly -->
+                           
+                            <Button Grid.Column="0" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Black"
+                                    Click="SetColor_Click" >
+                                <Rectangle Width="20" Height="20" Fill="Black"/>
+                            </Button>
+                            <Button Grid.Column="1" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Gray"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Gray"/>
+                            </Button>
+                            <Button Grid.Column="2" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="DarkRed"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="DarkRed"/>
+                            </Button>
+                            <Button Grid.Column="3" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                     Tag="Red"
+                                     Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Red"/>
+                            </Button>
+                            <Button Grid.Column="4" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Orange"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Orange"/>
+                            </Button>
+                            <Button Grid.Column="5" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Yellow"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Yellow"/>
+                            </Button>
+                            <Button Grid.Column="6" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Green"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Green"/>
+                            </Button>
+                            <Button Grid.Column="7" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Turquoise"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Turquoise"/>
+                            </Button>
+                            <Button Grid.Column="8" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Indigo"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Indigo"/>
+                            </Button>
+                            <Button Grid.Column="9" Grid.Row="0" Width="24" Height="24" Margin="0 4 4 4" Background="white"
+                                    Tag="Purple"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Purple"/>
+                            </Button>
+                            <Button Grid.Column="0" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="White"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="White"/>
+                            </Button>
+                            <Button Grid.Column="1" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="LightGray"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="LightGray"/>
+                            </Button>
+                            <Button Grid.Column="2" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="Brown"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Brown"/>
+                            </Button>
+                            <Button Grid.Column="3" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="Pink"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Pink"/>
+                            </Button>
+                            <Button Grid.Column="4" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="Gold"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Gold"/>
+                            </Button>
+                            <Button Grid.Column="5" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="LightYellow"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="LightYellow"/>
+                            </Button>
+                            <Button Grid.Column="6" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="Lime"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="Lime"/>
+                            </Button>
+                            <Button Grid.Column="7" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="LightBlue"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="LightBlue"/>
+                            </Button>
+                            <Button Grid.Column="8" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="CadetBlue"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="CadetBlue"/>
+                            </Button>
+                            <Button Grid.Column="9" Grid.Row="1" Width="24" Height="24" Margin="0 0 4 4" Background="white"
+                                    Tag="MediumPurple"
+                                    Click="SetColor_Click">
+                                <Rectangle Width="20" Height="20" Fill="MediumPurple"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
+
+
+        <Grid Grid.Row="1">
+            <Border x:Name="CanvasBorder" BorderBrush="LightGray" BorderThickness="2">
+                <Canvas  x:Name="paintSurface" 
+                         x:FieldModifier="public"
+                         Background="White"
+                         MouseDown="Canvas_MouseDown"
+                         MouseMove="Canvas_MouseMove"
+                         MouseUp="Canvas_MouseUp" Grid.ColumnSpan="2"
+                         ClipToBounds="True">
+                </Canvas>
+            </Border>
+        </Grid>
+    </Grid>
+    
+</Fluent:RibbonWindow>
+    
+

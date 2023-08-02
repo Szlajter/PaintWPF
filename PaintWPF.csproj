@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Cursors\eraser.cur" />
+    <None Remove="Images\1px-line.png" />
+    <None Remove="Images\3px-line.png" />
+    <None Remove="Images\5px-line.png" />
+    <None Remove="Images\8px-line.png" />
+    <None Remove="Images\ellipse.png" />
+    <None Remove="Images\eraser.png" />
+    <None Remove="Images\fill-rect.png" />
+    <None Remove="Images\fill.png" />
+    <None Remove="Images\line.png" />
+    <None Remove="Images\new.png" />
+    <None Remove="Images\open.png" />
+    <None Remove="Images\paint.png" />
+    <None Remove="Images\pencil.png" />
+    <None Remove="Images\rectangle.png" />
+    <None Remove="Images\save.png" />
+    <None Remove="Images\thickness-button.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\1px-line.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fluent.Ribbon" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Cursors\eraser.cur" />
+    <Resource Include="Images\3px-line.png" />
+    <Resource Include="Images\5px-line.png" />
+    <Resource Include="Images\8px-line.png" />
+    <Resource Include="Images\ellipse.png" />
+    <Resource Include="Images\eraser.png" />
+    <Resource Include="Images\fill-rect.png" />
+    <Resource Include="Images\fill.png" />
+    <Resource Include="Images\line.png" />
+    <Resource Include="Images\new.png" />
+    <Resource Include="Images\open.png" />
+    <Resource Include="Images\paint.png" />
+    <Resource Include="Images\pencil.png" />
+    <Resource Include="Images\rectangle.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\thickness-button.png" />
+  </ItemGroup>
+
+</Project>
